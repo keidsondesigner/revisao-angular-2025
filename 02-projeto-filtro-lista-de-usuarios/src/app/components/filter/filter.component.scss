@@ -1,0 +1,35 @@
+.filter-container {
+    width: 100%;
+    height: 100%;
+    // background-color: red;
+}
+.filter-form {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    &__field-name {
+        // background-color: red;
+        width: calc(28% - 10px);
+    }
+
+    &__field-date {
+        // background-color: green;
+        width: calc(28% - 10px);
+    }
+
+    &__field-status {
+        // background-color: blue;
+        width: calc(28% - 10px);
+    }
+
+    &__button { 
+        // background-color: purple;
+        // width: calc(25% - 10px);
+    }
+}
