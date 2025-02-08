@@ -1,0 +1,36 @@
+.button {        
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 25px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+
+    // Variante primária
+    &--primary {
+        background-color: #eb684b;
+        color: #532e11;
+        
+        &:hover {
+            background-color: #f87c60;
+        }
+    }
+
+    // Variante secundária
+    &--secondary {
+        background-color: #9f56d8;
+        color: #2d183e;
+        
+        &:hover {
+            background-color: #a45cdb;
+        }
+    }
+}

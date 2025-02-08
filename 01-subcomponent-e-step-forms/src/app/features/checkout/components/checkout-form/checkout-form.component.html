@@ -1,0 +1,35 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Finalizar Compra</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <router-outlet></router-outlet>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button 
+              type="button"
+              *ngIf="canGoBack"
+              (click)="goBack()">
+        Voltar
+      </button>
+      
+      <button mat-raised-button 
+              color="primary"
+              type="button"
+              *ngIf="canGoForward"
+              (click)="goForward()">
+        Próximo
+      </button>
+
+      <button mat-raised-button 
+              color="primary"
+              type="submit"
+              *ngIf="!canGoForward">
+        Finalizar Pedido
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

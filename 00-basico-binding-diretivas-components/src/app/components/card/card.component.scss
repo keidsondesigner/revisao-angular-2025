@@ -1,0 +1,51 @@
+.card {
+    &__container {
+        width: 350px;
+        max-width: 350px;
+        border-radius: 25px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        // Variante primária
+        &--primary {
+            background-color: #ffc7b2;
+            color: #532e11;
+        }
+
+        // Variante secundária
+        &--secondary {
+            background-color: #ede1ff;
+            color: #2d183e;
+        }
+    }
+
+    &__item {
+        // padding: 10px;
+    }
+
+    &__plan {
+        font-size: 24px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            font-size: 20px;
+        }
+
+        b {
+            font-weight: 700;
+        }
+    }
+
+    &__price {
+        font-size: 28px;
+        font-weight: 600;
+
+        @media (max-width: 768px) {
+            font-size: 24px;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+<div class="card__container">
+  <app-card 
+    [plan]="'Plano'"
+    [typePlan]="'Simples'"
+    [price]="'R$ 100,00'"
+    [textButton]="'Adquirir 1'"
+  >
+  </app-card> 
+
+  <app-card 
+    [plan]="'Plano'"
+    [typePlan]="'Completo'"
+    [price]="'R$ 380,00'"
+    [textButton]="'Adquirir 2'"
+    [variant]="'secondary'"
+  >
+  </app-card> 
+  <app-card 
+    [plan]="'Plano'"
+    [typePlan]="'Diamante'" 
+    [price]="'R$ 380,00'"
+    [textButton]="'Adquirir 2'"
+    [variant]="'secondary'"
+  >
+  </app-card> 
+  <app-card 
+    [plan]="'Plano'"
+    [typePlan]="'Premium'"
+    [price]="'R$ 100,00'"
+    [textButton]="'Adquirir 1'"
+  >
+  </app-card> 
+  <div>
+    <h2>
+      Two way data binding
+    </h2>
+    <!-- Passando o valor do input para a variavel "name" -->
+    <input type="text" [(ngModel)]="name">
+    <p>Nome digitado: {{ name }}</p>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

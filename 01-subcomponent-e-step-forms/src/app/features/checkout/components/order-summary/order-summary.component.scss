@@ -1,0 +1,27 @@
+.order-summary {
+  padding: 20px 0;
+
+  .items-list {
+    margin-bottom: 20px;
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+  }
+
+  .summary-totals {
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+
+      &.total {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+    }
+  }
+}

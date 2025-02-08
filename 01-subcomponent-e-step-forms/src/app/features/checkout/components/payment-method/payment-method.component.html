@@ -1,0 +1,46 @@
+<div [formGroup]="paymentForm" class="payment-form">
+  <h3>Método de Pagamento</h3>
+
+  <div class="form-row">
+    <mat-form-field>
+      <mat-label>Selecione o método de pagamento</mat-label>
+      <mat-select formControlName="method">
+        <mat-option *ngFor="let method of paymentMethods" [value]="method.value">
+          {{method.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <ng-container *ngIf="paymentForm.get('method')?.value === 'credit' || paymentForm.get('method')?.value === 'debit'">
+    <div class="form-row">
+      <mat-form-field class="full-width">
+        <mat-label>Número do Cartão</mat-label>
+        <input matInput formControlName="cardNumber" placeholder="0000 0000 0000 0000">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field class="full-width">
+        <mat-label>Nome no Cartão</mat-label>
+        <input matInput formControlName="cardName">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>Data de Validade</mat-label>
+        <input matInput formControlName="expiryDate" placeholder="MM/AA">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>CVV</mat-label>
+        <input matInput formControlName="cvv" type="password" maxlength="4">
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+  <div *ngIf="paymentForm.get('method')?.value === 'pix'" class="pix-info">
+    <p>Você receberá um QR Code para pagamento após confirmar o pedido.</p>
+  </div>
+</div>

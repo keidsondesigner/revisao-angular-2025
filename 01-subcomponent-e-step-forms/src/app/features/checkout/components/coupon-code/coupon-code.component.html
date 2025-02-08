@@ -1,0 +1,19 @@
+<div class="coupon-code">
+  <h3>Cupom de Desconto</h3>
+  <div class="form-row">
+    <mat-form-field>
+      <mat-label>Código do Cupom</mat-label>
+      <input matInput 
+             [value]="value"
+             (input)="onInputChange($event)"
+             [disabled]="disabled"
+             placeholder="Digite seu cupom">
+    </mat-form-field>
+    <button mat-raised-button 
+            color="primary"
+            [disabled]="disabled || !value"
+            (click)="applyCoupon()">
+      Aplicar
+    </button>
+  </div>
+</div>

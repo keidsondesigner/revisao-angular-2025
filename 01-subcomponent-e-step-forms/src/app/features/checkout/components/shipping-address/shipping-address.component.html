@@ -1,0 +1,46 @@
+<div [formGroup]="shippingForm" class="shipping-form">
+  <h3>Endereço de Entrega</h3>
+  
+  <div class="form-row">
+    <mat-form-field>
+      <mat-label>CEP</mat-label>
+      <input matInput formControlName="cep" placeholder="00000-000">
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+    <mat-form-field class="full-width">
+      <mat-label>Rua</mat-label>
+      <input matInput formControlName="rua">
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+    <mat-form-field>
+      <mat-label>Número</mat-label>
+      <input matInput formControlName="numero">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Complemento</mat-label>
+      <input matInput formControlName="complemento">
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+    <mat-form-field>
+      <mat-label>Bairro</mat-label>
+      <input matInput formControlName="bairro">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Cidade</mat-label>
+      <input matInput formControlName="cidade">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="estado">
+    </mat-form-field>
+  </div>
+</div>

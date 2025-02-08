@@ -1,0 +1,51 @@
+// Modificação de styles global do componente mat-slider
+.mat-mdc-slider {
+    &.mat-primary {
+        .mdc-slider__track--active {
+            background-color: #fd7557 !important;
+        }
+
+        .mdc-slider__track--active_fill {
+            border-color: #fd7557 !important;
+        }
+
+        .mdc-slider__thumb-knob {
+            background-color: #fd7557 !important;
+            border-color: #fd7557 !important;
+        }
+
+        .mdc-slider__thumb--focused .mdc-slider__thumb-knob {
+            background-color: #fd7557 !important;
+        }
+
+        .mdc-slider__thumb:hover .mdc-slider__thumb-knob {
+            background-color: #fd7557 !important;
+            border-color: #fd7557 !important;
+        }
+    }
+
+    // Estilo para variante secondary
+    &.mat-accent {
+        .mdc-slider__track--active {
+            background-color: #9f56d8 !important;
+        }
+
+        .mdc-slider__track--active_fill {
+            border-color: #9f56d8 !important;
+        }
+
+        .mdc-slider__thumb-knob {
+            background-color: #9f56d8 !important;
+            border-color: #9f56d8 !important;
+        }
+
+        .mdc-slider__thumb--focused .mdc-slider__thumb-knob {
+            background-color: #9f56d8 !important;
+        }
+
+        .mdc-slider__thumb:hover .mdc-slider__thumb-knob {
+            background-color: #9f56d8 !important;
+            border-color: #9f56d8 !important;
+        }
+    }
+}

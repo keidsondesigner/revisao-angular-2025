@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./styles/global-overrides.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, 
+body { 
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+}
