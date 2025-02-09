@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IUser } from './interfaces/user/user.interface';
 import { UsersListMock } from 'src/app/data/users-list';
 
@@ -7,12 +7,21 @@ import { UsersListMock } from 'src/app/data/users-list';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit { 
+  usersList: IUser[] = [];
   //selectedUser: IUser = UsersListMock[0];
   selectedUser: IUser = { } as IUser;
   hasUser: boolean = false;
 
   constructor() { }
+
+  ngOnInit(): void {
+
+    setTimeout(() => {
+      console.log('simulando cahamda HTTP para busca de usuários');
+      this.usersList = UsersListMock;
+    }, 3000)
+  }
 
   handleUserSelected(user: IUser) {
     console.log('handleUserSelected()', user);
