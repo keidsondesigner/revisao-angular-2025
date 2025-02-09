@@ -1,6 +1,6 @@
 import { IUser } from "../interfaces/user/user.interface";
 
-export const UsersList: IUser[] = [
+export const UsersListMock: IUser[] = [
     {
         nome: "João Silva",
         email: "joao.silva@example.com",
