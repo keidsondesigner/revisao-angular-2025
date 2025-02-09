@@ -13,4 +13,7 @@ export class UsersListComponent {
   displayedColumns: string[] = ['name', 'date', 'status'];
   usersList: IUser[] = UsersListMock;
 
+  onUserSelected(user: IUser) {
+    console.log(user);
+  }
 }

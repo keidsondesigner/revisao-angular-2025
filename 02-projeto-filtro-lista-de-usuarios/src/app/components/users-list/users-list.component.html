@@ -2,19 +2,34 @@
     <!-- name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Nome </th>
-      <td mat-cell *matCellDef="let item" class="users-list__item"> {{item.nome}} </td>
+      <td mat-cell *matCellDef="let item" 
+        class="users-list__item"
+        (click)="onUserSelected(item)"
+      > 
+        {{item.nome}} 
+      </td>
     </ng-container>
   
     <!-- date Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef> Data de cadastro </th>
-      <td mat-cell *matCellDef="let item" class="users-list__item"> {{item.dataCadastro}} </td>
+      <td mat-cell *matCellDef="let item" 
+        class="users-list__item"
+        (click)="onUserSelected(item)"
+      > 
+        {{item.dataCadastro}} 
+      </td>
     </ng-container>
   
     <!-- status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let item" class="users-list__item"> {{item.ativo}} </td>
+      <td mat-cell *matCellDef="let item" 
+        class="users-list__item"
+        (click)="onUserSelected(item)"
+      > 
+            {{item.ativo}} 
+      </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
