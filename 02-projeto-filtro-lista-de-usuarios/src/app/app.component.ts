@@ -10,9 +10,13 @@ import { UsersListMock } from 'src/app/data/users-list';
 export class AppComponent {
   //selectedUser: IUser = UsersListMock[0];
   selectedUser: IUser = { } as IUser;
+  hasUser: boolean = false;
+
+  constructor() { }
 
   handleUserSelected(user: IUser) {
     console.log('handleUserSelected()', user);
+    this.hasUser = true;
 
     // Pego os dados do usuário selecionado pelo Emitir @Output
     // e passo pro @Input

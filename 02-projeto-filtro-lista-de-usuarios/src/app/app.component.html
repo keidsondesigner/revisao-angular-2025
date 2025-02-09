@@ -10,7 +10,7 @@
   </div>
   
   <div class="right-container">
-    <app-user-details [user]="selectedUser"></app-user-details>
+    <app-user-details [user]="selectedUser" *ngIf="hasUser"></app-user-details>
   </div>
 </section>
 <router-outlet></router-outlet>
