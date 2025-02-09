@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UsersListMock } from 'src/app/data/users-list';
 import { IUser } from 'src/app/interfaces/user/user.interface';
 
@@ -13,7 +13,15 @@ export class UsersListComponent {
   displayedColumns: string[] = ['name', 'date', 'status'];
   usersList: IUser[] = UsersListMock;
 
+  // Emitindo(enviando) o usuário selecionado
+  @Output() userSelected = new EventEmitter<IUser>();
+
+  constructor() { }
+
   onUserSelected(user: IUser) {
-    console.log(user);
+    console.log('onUserSelected()', user);
+
+    // Emitindo(enviando) o evento com o usuário selecionado
+    this.userSelected.emit(user);
   }
 }
