@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from './interfaces/user/user.interface';
 import { UsersListMock } from 'src/app/data/users-list';
 
+interface IFilterOptions {
+  name: string;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
+  status: boolean | undefined;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,5 +37,10 @@ export class AppComponent implements OnInit {
     // Pego os dados do usuário selecionado pelo Emitir @Output
     // e passo pro @Input
     this.selectedUser = user;
+  }
+
+  handleFilterApplied(filterOptions: IFilterOptions) {
+    // Pego os dados do filtro pelo Emitir @Output
+    console.log('handleFilterApplied()', filterOptions);
   }
 }
