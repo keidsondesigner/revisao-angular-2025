@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from './interfaces/user/user.interface';
 import { UsersListMock } from 'src/app/data/users-list';
+import { isWithinInterval } from 'date-fns';
 
 interface IFilterOptions {
   name: string;
@@ -60,6 +61,8 @@ export class AppComponent implements OnInit {
 
     filteredList = this.filterUsersListByStatus(filterOptions.status, filteredList);
 
+    filteredList = this.filterUsersListByDate(filterOptions.startDate, filterOptions.endDate, filteredList);
+
     return filteredList;
   }
 
@@ -98,6 +101,29 @@ export class AppComponent implements OnInit {
     // se verdadeiro, retorna o usuário na lista final retornada
     // se falso, exclui o usuário da lista final retornada
     const filteredList = usersList.filter(user => user.ativo === status);
+  
+    // retorna a lista final filtrada;
+    return filteredList;
+  }
+
+  filterUsersListByDate(startDate: Date | undefined, endDate: Date | undefined, usersList: IUser[]): IUser[] {
+    const DATES_NOT_SELECTED = startDate === undefined || endDate === undefined;
+
+    // Se as datas nao foram selecionadas, retorna a lista original;
+    if (DATES_NOT_SELECTED) {
+      return usersList;
+    }
+
+    // Se as datas foram selecionadas,
+    // Vou percorrer a lista de usuários
+    // e acesso a propriedade "dataCadastro" de cada objeto "usuário"
+    // verifico em cada objeto a propriedade "usuário.dataCadastro", esta no intervalo de datas selecionadas
+    // se verdadeiro, retorna o usuário na lista final retornada
+    // se falso, exclui o usuário da lista final retornada
+    const filteredList = usersList.filter(user => isWithinInterval(new Date(user.dataCadastro), {
+      start: startDate,
+      end: endDate
+    }));
   
     // retorna a lista final filtrada;
     return filteredList;
