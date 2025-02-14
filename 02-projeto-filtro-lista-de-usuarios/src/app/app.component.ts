@@ -49,10 +49,16 @@ export class AppComponent implements OnInit {
     this.usersListFiltered = this.filterUsersList(filterOptions, this.usersList);
   }
 
+  clearFilter() {
+    this.usersListFiltered = this.usersList;
+  }
+
   filterUsersList(filterOptions: IFilterOptions, usersList: IUser[]): IUser[] {
     let filteredList: IUser[] = [];
 
     filteredList = this.filterUsersListByName(filterOptions.name, usersList);
+
+    filteredList = this.filterUsersListByStatus(filterOptions.status, filteredList);
 
     return filteredList;
   }
@@ -69,9 +75,32 @@ export class AppComponent implements OnInit {
     // Vou percorrer a lista de usuários
     // e acesso a propriedade "nome" de cada objeto "usuário"
     // verifico em cada objeto a propriedade "usuário.nome", possui(include) o nome digitado
+    // se verdadeiro, retorna o usuário na lista final retornada
+    // se falso, exclui o usuário da lista final retornada
     const filteredList = usersList.filter(user => user.nome.toLowerCase().includes(name.toLowerCase()));
 
-    // retorna a lista filtrada;
+    // retorna a lista final filtrada;
     return filteredList;
   }
+
+  filterUsersListByStatus(status: boolean | undefined, usersList: IUser[]): IUser[] {
+    const STATUS_NOT_SELECTED = status === undefined;
+
+    // Se o status não foi selecionado, retorna a lista original;
+    if (STATUS_NOT_SELECTED) {
+      return usersList;
+    }
+
+    // Se o status foi selecionado, 
+    // Vou percorrer a lista de usuários
+    // e acesso a propriedade "ativo" de cada objeto "usuário"
+    // verifico em cada objeto a propriedade "usuário.ativo", possui(include) o status selecionado
+    // se verdadeiro, retorna o usuário na lista final retornada
+    // se falso, exclui o usuário da lista final retornada
+    const filteredList = usersList.filter(user => user.ativo === status);
+  
+    // retorna a lista final filtrada;
+    return filteredList;
+  }
+
 }
