@@ -5,7 +5,11 @@
 
     </div>
     <div class="main-left-div">
-      <app-users-list [usersList]="usersList" (onUserSelected)="handleUserSelected($event)"></app-users-list>
+      <app-users-list 
+        [usersList]="usersListFiltered" 
+        (onUserSelected)="handleUserSelected($event)"
+      >
+      </app-users-list>
     </div>
   </div>
   

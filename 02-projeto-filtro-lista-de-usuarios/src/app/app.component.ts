@@ -16,7 +16,8 @@ interface IFilterOptions {
 })
 export class AppComponent implements OnInit { 
   usersList: IUser[] = [];
-  //selectedUser: IUser = UsersListMock[0];
+  usersListFiltered: IUser[] = []; // lista filtrada
+  
   selectedUser: IUser = { } as IUser;
   hasUser: boolean = false;
 
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit {
 
     setTimeout(() => {
       console.log('simulando cahamda HTTP para busca de usuários');
-      this.usersList = UsersListMock;
+      this.usersList = UsersListMock; // Lista original 
+      this.usersListFiltered = this.usersList; // Lista filtrada
     }, 3000)
   }
 
@@ -40,7 +42,36 @@ export class AppComponent implements OnInit {
   }
 
   handleFilterApplied(filterOptions: IFilterOptions) {
-    // Pego os dados do filtro pelo Emitir @Output
+    // Pego os dados do filtro pelo $event do Emitir @Output
     console.log('handleFilterApplied()', filterOptions);
+
+    // Filtrando a lista original
+    this.usersListFiltered = this.filterUsersList(filterOptions, this.usersList);
+  }
+
+  filterUsersList(filterOptions: IFilterOptions, usersList: IUser[]): IUser[] {
+    let filteredList: IUser[] = [];
+
+    filteredList = this.filterUsersListByName(filterOptions.name, usersList);
+
+    return filteredList;
+  }
+
+  filterUsersListByName(name: string, usersList: IUser[]): IUser[] {
+    const NAME_NOT_TYPPED = name === undefined;
+
+    // Se o nome não foi digitado, retorna a lista original;
+    if (NAME_NOT_TYPPED) {
+      return usersList;
+    }
+
+    // Se o nome foi digitado, 
+    // Vou percorrer a lista de usuários
+    // e acesso a propriedade "nome" de cada objeto "usuário"
+    // verifico em cada objeto a propriedade "usuário.nome", possui(include) o nome digitado
+    const filteredList = usersList.filter(user => user.nome.toLowerCase().includes(name.toLowerCase()));
+
+    // retorna a lista filtrada;
+    return filteredList;
   }
 }
