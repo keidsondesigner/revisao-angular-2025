@@ -14,14 +14,14 @@ export class UsersListComponent {
   @Input() usersList: IUser[] = [];
 
   // Emitindo(enviando) o usuário selecionado
-  @Output() userSelected = new EventEmitter<IUser>();
+  @Output() onUserSelected = new EventEmitter<IUser>();
 
   constructor() { }
 
-  onUserSelected(user: IUser) {
+  userSelected(user: IUser) {
     console.log('onUserSelected()', user);
 
     // Emitindo(enviando) o evento com o usuário selecionado
-    this.userSelected.emit(user);
+    this.onUserSelected.emit(user);
   }
 }

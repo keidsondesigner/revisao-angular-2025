@@ -1,11 +1,11 @@
 <section class="container">
   <div class="left-container">
     <div class="top-div">
-      <app-filter (filterApplied)="handleFilterApplied($event)"></app-filter>
+      <app-filter (onFilterApplied)="handleFilterApplied($event)"></app-filter>
 
     </div>
     <div class="main-left-div">
-      <app-users-list [usersList]="usersList" (userSelected)="handleUserSelected($event)"></app-users-list>
+      <app-users-list [usersList]="usersList" (onUserSelected)="handleUserSelected($event)"></app-users-list>
     </div>
   </div>
   

@@ -4,7 +4,7 @@
       <th mat-header-cell *matHeaderCellDef> Nome </th>
       <td mat-cell *matCellDef="let item" 
         class="users-list__item"
-        (click)="onUserSelected(item)"
+        (click)="userSelected(item)"
       > 
         {{item.nome}} 
       </td>
@@ -15,7 +15,7 @@
       <th mat-header-cell *matHeaderCellDef> Data de cadastro </th>
       <td mat-cell *matCellDef="let item" 
         class="users-list__item"
-        (click)="onUserSelected(item)"
+        (click)="userSelected(item)"
       > 
         {{item.dataCadastro}} 
       </td>
@@ -26,7 +26,7 @@
       <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let item" 
         class="users-list__item"
-        (click)="onUserSelected(item)"
+        (click)="userSelected(item)"
       > 
             {{item.ativo}} 
       </td>

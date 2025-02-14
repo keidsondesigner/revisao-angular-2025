@@ -28,7 +28,7 @@ export class FilterComponent {
   };
 
   // Emitindo(enviando) os dados do filtro
-  @Output() filterApplied = new EventEmitter<IFilterOptions>();
+  @Output() onFilterApplied = new EventEmitter<IFilterOptions>();
 
 
   constructor() {}
@@ -40,14 +40,10 @@ export class FilterComponent {
   }
 
   applyFilter() {
-    console.log(this.filterOptions);
-  }
-
-  onFilterApplied() {
     console.log('onFilterApplied()', this.filterOptions);
 
     // Emitindo(enviando) os dados do filtro
-    this.filterApplied.emit(this.filterOptions);
+    this.onFilterApplied.emit(this.filterOptions);
   }
 
 }
