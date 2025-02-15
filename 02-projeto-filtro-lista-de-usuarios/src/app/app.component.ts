@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { filterUsersList } from './utils/filter-users-list';
+
 import { IUser } from './interfaces/user/user.interface';
 import { UsersListMock } from 'src/app/data/users-list';
-import { isWithinInterval } from 'date-fns';
 
 interface IFilterOptions {
   name: string;
@@ -47,86 +48,7 @@ export class AppComponent implements OnInit {
     console.log('handleFilterApplied()', filterOptions);
 
     // Filtrando a lista original
-    this.usersListFiltered = this.filterUsersList(filterOptions, this.usersList);
-  }
-
-  clearFilter() {
-    this.usersListFiltered = this.usersList;
-  }
-
-  filterUsersList(filterOptions: IFilterOptions, usersList: IUser[]): IUser[] {
-    let filteredList: IUser[] = [];
-
-    filteredList = this.filterUsersListByName(filterOptions.name, usersList);
-
-    filteredList = this.filterUsersListByStatus(filterOptions.status, filteredList);
-
-    filteredList = this.filterUsersListByDate(filterOptions.startDate, filterOptions.endDate, filteredList);
-
-    return filteredList;
-  }
-
-  filterUsersListByName(name: string, usersList: IUser[]): IUser[] {
-    const NAME_NOT_TYPPED = name === undefined;
-
-    // Se o nome não foi digitado, retorna a lista original;
-    if (NAME_NOT_TYPPED) {
-      return usersList;
-    }
-
-    // Se o nome foi digitado, 
-    // Vou percorrer a lista de usuários
-    // e acesso a propriedade "nome" de cada objeto "usuário"
-    // verifico em cada objeto a propriedade "usuário.nome", possui(include) o nome digitado
-    // se verdadeiro, retorna o usuário na lista final retornada
-    // se falso, exclui o usuário da lista final retornada
-    const filteredList = usersList.filter(user => user.nome.toLowerCase().includes(name.toLowerCase()));
-
-    // retorna a lista final filtrada;
-    return filteredList;
-  }
-
-  filterUsersListByStatus(status: boolean | undefined, usersList: IUser[]): IUser[] {
-    const STATUS_NOT_SELECTED = status === undefined;
-
-    // Se o status não foi selecionado, retorna a lista original;
-    if (STATUS_NOT_SELECTED) {
-      return usersList;
-    }
-
-    // Se o status foi selecionado, 
-    // Vou percorrer a lista de usuários
-    // e acesso a propriedade "ativo" de cada objeto "usuário"
-    // verifico em cada objeto a propriedade "usuário.ativo", possui(include) o status selecionado
-    // se verdadeiro, retorna o usuário na lista final retornada
-    // se falso, exclui o usuário da lista final retornada
-    const filteredList = usersList.filter(user => user.ativo === status);
-  
-    // retorna a lista final filtrada;
-    return filteredList;
-  }
-
-  filterUsersListByDate(startDate: Date | undefined, endDate: Date | undefined, usersList: IUser[]): IUser[] {
-    const DATES_NOT_SELECTED = startDate === undefined || endDate === undefined;
-
-    // Se as datas nao foram selecionadas, retorna a lista original;
-    if (DATES_NOT_SELECTED) {
-      return usersList;
-    }
-
-    // Se as datas foram selecionadas,
-    // Vou percorrer a lista de usuários
-    // e acesso a propriedade "dataCadastro" de cada objeto "usuário"
-    // verifico em cada objeto a propriedade "usuário.dataCadastro", esta no intervalo de datas selecionadas
-    // se verdadeiro, retorna o usuário na lista final retornada
-    // se falso, exclui o usuário da lista final retornada
-    const filteredList = usersList.filter(user => isWithinInterval(new Date(user.dataCadastro), {
-      start: startDate,
-      end: endDate
-    }));
-  
-    // retorna a lista final filtrada;
-    return filteredList;
+    this.usersListFiltered = filterUsersList(filterOptions, this.usersList);
   }
 
 }
