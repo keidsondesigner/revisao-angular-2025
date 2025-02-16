@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { distinctUntilChanged, filter, startWith, Subject, takeUntil } from 'rxjs';
 
 interface IFilterOptions {
   name: string;
@@ -12,38 +14,59 @@ interface IFilterOptions {
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent {
+export class FilterComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+
   statusList = [
     { value: true, label: 'Ativo' }, 
     { value: false, label: 'Inativo' }
   ];
 
-  // Como não estou usando <form>formulário,
-  // não preciso usar "name" em cada campo do html 
-  filterOptions: IFilterOptions = {
-    name: '',
-    startDate: undefined,
-    endDate: undefined,
-    status: undefined,
-  };
+  // FormControls para cada campo
+  nameControl = new FormControl('', { nonNullable: true }); // Garante em tempo de compilação que o valor nunca será nulo
+  startDateControl = new FormControl<Date | undefined>(undefined, { nonNullable: true });
+  endDateControl = new FormControl<Date | undefined>(undefined, { nonNullable: true });
+  statusControl = new FormControl<boolean | null>(null, { nonNullable: true });
 
-  // Emitindo(enviando) os dados do filtro
   @Output() onFilterApplied = new EventEmitter<IFilterOptions>();
 
+  ngOnInit() {
+    // Observar mudanças em todos os controles
+    this.nameControl.valueChanges
+      .pipe(
+        startWith(''),
+        takeUntil(this.destroy$), // cancela o observable quando o componente for destruído
+        distinctUntilChanged(), // evita emissão duplicadas
+      )
+      .subscribe(() => this.emitFilters());
 
-  constructor() {}
+    this.startDateControl.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.emitFilters());
 
+    this.endDateControl.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.emitFilters());
 
-  handleStartDateChange(date: Date) {
-    // Pegando o valor do [(ngModel)] com (ngModelChange)
-    console.log(date);
+    this.statusControl.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.emitFilters());
   }
 
-  applyFilter() {
-    console.log('onFilterApplied()', this.filterOptions);
-
-    // Emitindo(enviando) os dados do filtro
-    this.onFilterApplied.emit(this.filterOptions);
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
+  private emitFilters() {
+    const filterOptions: IFilterOptions = {
+      name: this.nameControl.value,
+      startDate: this.startDateControl.value || undefined,
+      endDate: this.endDateControl.value || undefined,
+      status: this.statusControl.value === null ? undefined : this.statusControl.value
+    };
+    
+    console.log('Emitindo filtros:', filterOptions);
+    this.onFilterApplied.emit(filterOptions);
+  }
 }

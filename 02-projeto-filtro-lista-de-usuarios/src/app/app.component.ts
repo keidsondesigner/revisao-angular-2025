@@ -19,8 +19,8 @@ interface IFilterOptions {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit { 
-  usersList$!: Observable<IUser[]>;
-  usersListFiltered$!: Observable<IUser[]>;
+  usersList$: Observable<IUser[]> = new Observable<IUser[]>();
+  usersListFiltered$: Observable<IUser[]> = new Observable<IUser[]>();
   
   selectedUser: IUser = { } as IUser;
   hasUser: boolean = false;
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       console.log('simulando cahamda HTTP para busca de usuários');
       this.usersList$ = of(UsersListMock); // Lista original como Observable
       this.usersListFiltered$ = this.usersList$; // Lista filtrada também como Observable
-    }, 3000)
+    }, 2000)
   }
 
   handleUserSelected(user: IUser) {
