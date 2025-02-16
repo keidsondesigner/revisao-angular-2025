@@ -5,11 +5,13 @@
 
     </div>
     <div class="main-left-div">
-      <app-users-list 
-        [usersList]="usersListFiltered" 
-        (onUserSelected)="handleUserSelected($event)"
-      >
-      </app-users-list>
+      <ng-container *ngIf="usersListFiltered$ | async as usersListFiltered">
+        <app-users-list 
+          [usersList]="usersListFiltered" 
+          (onUserSelected)="handleUserSelected($event)"
+        >
+        </app-users-list>
+      </ng-container>
     </div>
   </div>
   

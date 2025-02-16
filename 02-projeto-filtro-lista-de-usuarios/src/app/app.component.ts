@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filterUsersList } from './utils/filter-users-list';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { IUser } from './interfaces/user/user.interface';
 import { UsersListMock } from 'src/app/data/users-list';
@@ -17,8 +19,8 @@ interface IFilterOptions {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit { 
-  usersList: IUser[] = [];
-  usersListFiltered: IUser[] = []; // lista filtrada
+  usersList$!: Observable<IUser[]>;
+  usersListFiltered$!: Observable<IUser[]>;
   
   selectedUser: IUser = { } as IUser;
   hasUser: boolean = false;
@@ -29,8 +31,8 @@ export class AppComponent implements OnInit {
 
     setTimeout(() => {
       console.log('simulando cahamda HTTP para busca de usuários');
-      this.usersList = UsersListMock; // Lista original 
-      this.usersListFiltered = this.usersList; // Lista filtrada
+      this.usersList$ = of(UsersListMock); // Lista original como Observable
+      this.usersListFiltered$ = this.usersList$; // Lista filtrada também como Observable
     }, 3000)
   }
 
@@ -46,9 +48,11 @@ export class AppComponent implements OnInit {
   handleFilterApplied(filterOptions: IFilterOptions) {
     // Pego os dados do filtro pelo $event do Emitir @Output
     console.log('handleFilterApplied()', filterOptions);
-
-    // Filtrando a lista original
-    this.usersListFiltered = filterUsersList(filterOptions, this.usersList);
+    
+    // Aplicando o filtro usando operadores do RxJS
+    this.usersListFiltered$ = this.usersList$.pipe(
+      map(usersList => filterUsersList(filterOptions, usersList))
+    );
   }
 
 }
