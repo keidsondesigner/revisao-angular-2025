@@ -1,30 +1,27 @@
-<section class="filter-container">
+<form class="filter-container">
     <div class="filter-form">
         <mat-form-field class="filter-form__field-name">
             <mat-label>Busca de Usuários</mat-label>
-            <input [(ngModel)]="filterOptions.name" matInput placeholder="Digite o nome do Usuário">
+            <input [formControl]="nameControl" matInput placeholder="Digite o nome do Usuário">
         </mat-form-field>
 
         <mat-form-field class="filter-form__field-date">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker">
-                <input  [(ngModel)]="filterOptions.startDate" (ngModelChange)="handleStartDateChange($event)" matStartDate placeholder="Start date">
-                <input  [(ngModel)]="filterOptions.endDate" matEndDate placeholder="End date">
+                <input [formControl]="startDateControl" matStartDate placeholder="Start date">
+                <input [formControl]="endDateControl" matEndDate placeholder="End date">
             </mat-date-range-input>
-            <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
 
         <mat-form-field class="filter-form__field-status">
             <mat-label>Status</mat-label>
-            <mat-select [(ngModel)]="filterOptions.status">
+            <mat-select [formControl]="statusControl">
                 <mat-option *ngFor="let status of statusList" [value]="status.value">
                     {{status.label}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
-
-        <button (click)="applyFilter()" class="filter-form__button" mat-raised-button color="primary">Filtrar</button>
     </div>
-</section>
+</form>
